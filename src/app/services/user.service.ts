@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { catchError, map, Observable } from 'rxjs';
 import { User } from '../models/user';
 
 @Injectable()
@@ -21,6 +21,10 @@ export class UserService {
         },
       })
       .pipe(
+        catchError(() => {
+          this.authService.authorize();
+          return [];
+        }),
         map((user) => ({
           name: user.display_name,
           avatarUrl: user.images?.[0].url,
