@@ -1,0 +1,12 @@
+<ng-container *ngIf="{ user: user$ | async } as data">
+  <div class="app-avatar">
+    <img
+      class="app-avatar__img"
+      [src]="data.user?.avatarUrl"
+      [alt]="data.user?.name"
+    />
+    <div class="app-avatar__text">
+      {{ data.user?.name }}
+    </div>
+  </div>
+</ng-container>

@@ -1,0 +1,7 @@
+@use '../../../styles/variables' as variables;
+
+.app-button {
+  border-radius: 3em;
+  padding: 1.6rem 3.2rem;
+  background-color: variables.$primary;
+}
