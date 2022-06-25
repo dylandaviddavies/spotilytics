@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
 import { map } from 'rxjs';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-signin-spotify',
@@ -11,7 +11,7 @@ import { map } from 'rxjs';
 export class SigninSpotifyComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
-    private authService: AuthService,
+    private userService: UserService,
     private router: Router
   ) {}
 
@@ -19,7 +19,7 @@ export class SigninSpotifyComponent implements OnInit {
     this.route.fragment
       .pipe(map((fragment) => new URLSearchParams(fragment)))
       .subscribe((fragment) => {
-        this.authService.setToken({
+        this.userService.updateToken({
           access_token: fragment.get('access_token'),
           token_type: fragment.get('token_type'),
           expires_in: parseInt(fragment.get('expires_in')),

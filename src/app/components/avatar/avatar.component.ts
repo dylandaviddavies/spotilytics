@@ -1,14 +1,17 @@
-import { Component,  } from '@angular/core';
-import {Select} from "@ngxs/store";
-import {UserState} from "../../state";
-import {Observable} from "rxjs";
-import {User} from "../../models/user";
+import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { User } from '../../models/user';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-avatar',
   templateUrl: './avatar.component.html',
-  styleUrls: ['./avatar.component.scss']
+  styleUrls: ['./avatar.component.scss'],
 })
 export class AvatarComponent {
-  @Select(UserState.getUser) user$!: Observable<User>;
+  user$!: Observable<User>;
+
+  constructor(userService: UserService) {
+    this.user$ = userService.user$;
+  }
 }
